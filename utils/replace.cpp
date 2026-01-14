@@ -28,8 +28,6 @@ void replacePattern(std::string &str, const std::string &input, const std::strin
 	{
 		str.replace(found, pattern.size(), input);
 		found -= pattern.size();
-		if (found < 0)
-			return;
 	}
 }
 

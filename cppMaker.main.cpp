@@ -86,7 +86,7 @@ int main()
 			index = -1;
 		}
 	}
-	catch (std::exception)
+	catch (const std::exception &e)
 	{
 		return (1);
 	}

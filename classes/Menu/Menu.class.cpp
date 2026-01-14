@@ -75,7 +75,7 @@ void MenuList::deleteItem(std::size_t index)
 
 MenuItem *MenuList::getItem(std::size_t index)
 {
-	if (index < 0 || index >= this->_vList.size())
+	if (index >= this->_vList.size())
 		return (nullptr);
 	return (&this->_vList[index]);
 }
@@ -102,7 +102,7 @@ void MenuList::resetMenu(void)
 
 void MenuList::changeItem(MenuItem &item, std::size_t index)
 {
-	if (index < 0 || index >= this->_vList.size())
+	if (index >= this->_vList.size())
 		return;
 
 	this->_vList[index] = item;
@@ -168,7 +168,7 @@ MenuList &ListOfMenu::addMenu(const std::string &name)
 
 MenuList *ListOfMenu::getMenu(std::size_t index)
 {
-	if (index < 0 || index >= this->_listOfMenu.size())
+	if (index >= this->_listOfMenu.size())
 		return (nullptr);
 	return (&this->_listOfMenu[index]);
 }
