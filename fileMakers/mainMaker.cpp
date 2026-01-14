@@ -8,6 +8,9 @@ bool mainMaker(MenuItem *item, MenuList *menu)
 	if (!menu)
 		return (true);
 
+	if (!handleInputAndValidate(item->getInputName(), *menu, "main name", MenuField::Name))
+		return (false);
+
 	// HANDLE PATH =================================
 	item->setInputPath(pwd() + BASIC_PATH_MAIN);
 

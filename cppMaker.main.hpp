@@ -41,6 +41,8 @@
 // FILE EXTENSION
 #define DOT_CLASS_HPP ".class.hpp"
 #define DOT_CLASS_CPP ".class.cpp"
+#define DOT_MAIN_CPP ".main.cpp"
+#define DOT_MAIN_HPP ".main.hpp"
 #define DOT_CPP ".cpp"
 #define DOT_HPP ".hpp"
 

@@ -62,10 +62,10 @@ void buildFileName(UserInput &input)
 		break;
 	case tMAIN_HPP:
 	case tMAIN_CPP:
-		if (input.getFileName().find(DOT_HPP) != std::string::npos)
-			input.setFileName(input.getName() + DOT_CPP);
+		if (input.getFileName().find(DOT_MAIN_HPP) != std::string::npos)
+			input.setFileName(input.getName() + DOT_MAIN_CPP);
 		else
-			input.setFileName(input.getName() + DOT_HPP);
+			input.setFileName(input.getName() + DOT_MAIN_HPP);
 		break;
 	case tCLASS_CPP:
 	case tCLASS_HPP:
