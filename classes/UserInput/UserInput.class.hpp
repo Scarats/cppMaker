@@ -44,6 +44,7 @@ private:
 	std::string _name;
 	std::string _path;
 	std::string _fileName;
+	bool addToMakefile = false;
 };
 
 #endif

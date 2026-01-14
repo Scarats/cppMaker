@@ -123,5 +123,9 @@ bool createFile(UserInput &input)
 	createPath(input);
 	findAndReplace(buff, input);
 	buildFileName(input);
-	return (createNewFile(input, buff));
+	if (!createNewFile(input, buff))
+		return (false);
+	// add to makefile
+	// addToMakefile = false;
+	return (
 }
