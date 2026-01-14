@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# Build and install the 'cppMaker' program in a simple, portable way.
+# Build and install the 'cppMaker' program with all its dependencies.  
 # - Compiles cppMaker using the Makefile
-# - Installs it to ~/.local/bin by default (or a dir you pass as $1)
-# - Creates a 'cppm' alias/symlink for easy access
+# - Installs it to ~/. local/share/cppMaker with all resources
+# - Creates a wrapper script in ~/.local/bin for easy access as 'cppm'
 # - Ensures that directory is on PATH for future shells
 
 set -e
@@ -15,35 +15,50 @@ cd -- "$(dirname "$0")"
 echo "Building cppMaker..."
 make re
 
-# Choose install directory (override by passing one, e.g. /usr/local/bin)
-PREFIX="${1:-$HOME/.local/bin}"
-mkdir -p "$PREFIX"
+# Installation directories
+BIN_DIR="${1:-$HOME/.local/bin}"
+INSTALL_DIR="$HOME/.local/share/cppMaker"
 
-# Install the binary (prefer 'install', fallback to cp + chmod)
-if command -v install >/dev/null 2>&1; then
-  install -m 755 cppMaker "$PREFIX/cppMaker"
-else
-  cp cppMaker "$PREFIX/cppMaker"
-  chmod 755 "$PREFIX/cppMaker"
+mkdir -p "$BIN_DIR"
+mkdir -p "$INSTALL_DIR"
+
+# Install the program and all its resources
+echo "Installing cppMaker to:  $INSTALL_DIR"
+cp cppMaker "$INSTALL_DIR/cppMaker"
+chmod 755 "$INSTALL_DIR/cppMaker"
+
+# Copy templates and other necessary files/directories
+if [ -d "templates" ]; then
+  cp -r templates "$INSTALL_DIR/"
+  echo "Copied templates directory"
 fi
-echo "Installed to: $PREFIX/cppMaker"
 
-# Create 'cppm' symlink/alias for convenience
-if command -v install >/dev/null 2>&1; then
-  ln -sf "$PREFIX/cppMaker" "$PREFIX/cppm"
-else
-  ln -s "$PREFIX/cppMaker" "$PREFIX/cppm" 2>/dev/null || cp "$PREFIX/cppMaker" "$PREFIX/cppm"
-fi
-echo "Created shortcut: $PREFIX/cppm"
+# You may need to copy other directories too, uncomment if needed: 
+# if [ -d "includes" ]; then
+#   cp -r includes "$INSTALL_DIR/"
+# fi
 
-# If not already on PATH, append to ~/.profile so future shells can find it
+# Create wrapper script that sets CPPMAKER_DIR but stays in current directory
+cat > "$BIN_DIR/cppm" << 'EOF'
+#!/bin/sh
+# Wrapper script for cppMaker
+# Sets CPPMAKER_DIR so the program can find templates
+# but executes in the user's current directory
+export CPPMAKER_DIR="$HOME/.local/share/cppMaker"
+exec "$CPPMAKER_DIR/cppMaker" "$@"
+EOF
+
+chmod 755 "$BIN_DIR/cppm"
+echo "Created wrapper script: $BIN_DIR/cppm"
+
+# If not already on PATH, append to ~/. profile so future shells can find it
 case ":$PATH:" in
-  *":$PREFIX:"*) ;;  # already present
+  *":$BIN_DIR:"*) ;;  # already present
   *)
-    printf '\n# Added by cppMaker build.sh\nexport PATH="%s:$PATH"\n' "$PREFIX" >> "$HOME/.profile"
-    echo "Added $PREFIX to PATH in ~/.profile"
-    echo "Open a new terminal or run: . ~/.profile"
+    printf '\n# Added by cppMaker build.sh\nexport PATH="%s:$PATH"\n' "$BIN_DIR" >> "$HOME/.profile"
+    echo "Added $BIN_DIR to PATH in ~/.profile"
+    echo "Open a new terminal or run: .  ~/.profile"
     ;;
 esac
-echo
-echo "Done. You can now run: cppm (or cppMaker)"
+
+echo "Done. You can now run: cppm"

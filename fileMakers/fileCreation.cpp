@@ -1,5 +1,15 @@
 #include "../cppMaker.main.hpp"
 
+std::string getTemplatePath(const std::string &relativePath)
+{
+	const char *installDir = std::getenv("CPPMAKER_DIR");
+	if (installDir != nullptr)
+	{
+		return std::string(installDir) + "/" + relativePath;
+	}
+	return relativePath;
+}
+
 bool createNewFile(UserInput &input, std::string &content)
 {
 	std::string filepath = input.getPath() + input.getFileName();
@@ -81,27 +91,27 @@ bool createFile(UserInput &input)
 	switch (input.getType())
 	{
 	case tMAKEFILE:
-		buff = getTemplate(MAKEFILE_PATH);
+		buff = getTemplate(getTemplatePath(MAKEFILE_PATH));
 		if (buff.empty())
 			return (false);
 		break;
 	case tMAIN_HPP:
-		buff = getTemplate(MAIN_HPP_PATH);
+		buff = getTemplate(getTemplatePath(MAIN_HPP_PATH));
 		if (buff.empty())
 			return (false);
 		break;
 	case tMAIN_CPP:
-		buff = getTemplate(MAIN_CPP_PATH);
+		buff = getTemplate(getTemplatePath(MAIN_CPP_PATH));
 		if (buff.empty())
 			return (false);
 		break;
 	case tCLASS_HPP:
-		buff = getTemplate(CLASS_HPP_PATH);
+		buff = getTemplate(getTemplatePath(CLASS_HPP_PATH));
 		if (buff.empty())
 			return (false);
 		break;
 	case tCLASS_CPP:
-		buff = getTemplate(CLASS_CPP_PATH);
+		buff = getTemplate(getTemplatePath(CLASS_CPP_PATH));
 		if (buff.empty())
 			return (false);
 		break;

@@ -12,6 +12,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <cstdlib>
 
 #include "classes/Menu/Menu.class.hpp"
 #include "classes/UserInput/UserInput.class.hpp"
