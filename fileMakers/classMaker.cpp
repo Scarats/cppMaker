@@ -9,7 +9,7 @@ bool classMaker(MenuItem *item, MenuList *menu)
 		return (false);
 
 	// HANDLE PATH =================================
-	item->setInputPath(pwd() + BASIC_PATH_CLASS + "/" + item->getInputName());
+	item->setInputPath(pwd() + BASIC_PATH_CLASS_HPP + "/" + item->getInputName());
 
 	if (menu->getSize() < 1)
 		menu->addItemBasic(item->getName());
@@ -37,6 +37,7 @@ bool classMaker(MenuItem *item, MenuList *menu)
 			item->setColor(RED);
 			return (false);
 		}
+		item->setInputPath(pwd() + BASIC_PATH_CLASS_CPP + "/" + item->getInputName());
 		item->setInputType(tCLASS_CPP);
 		if (!createFile(item->getInput()))
 		{

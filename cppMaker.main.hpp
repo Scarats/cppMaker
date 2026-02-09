@@ -33,7 +33,8 @@
 #define MAIN_CPP_PATH "templates/template.main.cpp"
 
 // CREATION PATH
-#define BASIC_PATH_CLASS "/classes"
+#define BASIC_PATH_CLASS_CPP "/src"
+#define BASIC_PATH_CLASS_HPP "/include"
 #define BASIC_PATH_CPP "/src"
 #define BASIC_PATH_MAKEFILE ""
 #define BASIC_PATH_MAIN ""
