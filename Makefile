@@ -3,7 +3,7 @@ SRCS = cppMaker.main.cpp utils/printUtils.cpp utils/replace.cpp \
 	includes/CheckString/CheckString.cpp utils/handleInputs.cpp \
 	fileMakers/makefileMaker.cpp fileMakers/pathHandler.cpp \
 	fileMakers/fileCreation.cpp fileMakers/classMaker.cpp \
-	fileMakers/mainMaker.cpp fileMakers/dotCppMaker.cpp \
+	fileMakers/mainMaker.cpp fileMakers/dotCppMaker.cpp fileMakers/addToMakefile.cpp \
 
 FLAGS = -Wall -Wextra -Werror -std=c++20 -g
 CC    = c++

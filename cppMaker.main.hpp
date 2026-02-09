@@ -60,6 +60,7 @@ bool makefileMaker(MenuItem *item, MenuList *menu);
 bool classMaker(MenuItem *item, MenuList *menu);
 bool mainMaker(MenuItem *item, MenuList *menu);
 bool dotCppMaker(MenuItem *item, MenuList *menu);
+bool addToMakefile(MenuItem *item, MenuList *menu);
 
 // INPUT
 bool handleInputAndValidate(std::string &str, MenuList &list,

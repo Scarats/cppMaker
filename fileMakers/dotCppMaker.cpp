@@ -34,7 +34,7 @@ bool dotCppMaker(MenuItem *item, MenuList *menu)
 			item->setColor(RED);
 			return (false);
 		}
-
+		addToMakefile(item, menu);
 		item->setColor(GREEN);
 		item->increaseTimeUsed(1);
 		return (false);
