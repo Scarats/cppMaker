@@ -9,25 +9,41 @@ bool checkFile(const std::string &filepath)
 
 bool addToMakefile(MenuItem *item, MenuList *menu)
 {
-    if (!handleInputYesNo(menu, "Add .cpp to Makefile", MenuField::Name))
-        return false;
+    menu->changeItem(*item, 0);
 
-    std::string const path = "Makefile";
-    if (!checkFile(path))
+    // DISPLAY THE MENU
+	MenuList buffList("tmp");
+	buffList.addItemBasic(item->getInputName());
+    if (!handleInputYesNo(&buffList, "add " + item->getInputName() + " to Makefile", MenuField::Name))
+        return (false);
+
+    // BUILD THE CURR PATH FOR THE MAKEFILE
+    std::string const currPath = pwd();
+    if (currPath.empty())
+        return (false);
+    std::string const path = currPath + "/Makefile";
+    if (checkFile(path))
     {
         item->setColor(RED);
-        return false;
+        return (false);
     }
 
+    // CREATE THE FILE STREAMS
     std::ifstream in(path);
-    std::ofstream out("Makefile.tmp");
+    std::ofstream out(currPath + "/Makefile.tmp");
 
     if (!in || !out)
-        return false;
+        return (false);
 
-    std::string fileName = BASIC_PATH_CPP + item->getInput().getFileName() + " ";
-    const std::string pattern = "SRC = ";
+    // BUILD THE FILENAME WITH THE RELATIVE PATH FOR THE MAKEFILE
+    std::string fileName = BASIC_PATH_CPP;
+    if (!fileName.empty() && fileName.front() == '/')
+        fileName.erase(0, 1);
+    fileName.append("/" + item->getInput().getFileName() + " ");
+    
 
+    // FIND AND ADD THE FILE TO THE MAKEFILE
+    const std::string pattern = "SRCS = ";
     std::string line;
     bool inserted = false;
 
