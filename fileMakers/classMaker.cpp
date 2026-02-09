@@ -37,7 +37,7 @@ bool classMaker(MenuItem *item, MenuList *menu)
 			item->setColor(RED);
 			return (false);
 		}
-		item->setInputPath(pwd() + BASIC_PATH_CLASS_CPP + "/" + item->getInputName());
+		item->setInputPath(pwd() + BASIC_PATH_CPP + "/" + item->getInputName());
 		item->setInputType(tCLASS_CPP);
 		if (!createFile(item->getInput()))
 		{
