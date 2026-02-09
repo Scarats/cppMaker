@@ -64,5 +64,5 @@ bool addToMakefile(MenuItem *item, MenuList *menu)
     std::remove("Makefile");
     std::rename("Makefile.tmp", "Makefile");
 
-    return true;
+    return (true);
 }
