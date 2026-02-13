@@ -44,7 +44,8 @@ bool classMaker(MenuItem *item, MenuList *menu)
 			item->setColor(RED);
 			return (false);
 		}
-		if (addToMakefile(item, menu))
+		addToMakefile(item, menu);
+		if (item->getColor() != RED)
 			item->setColor(GREEN);
 		item->increaseTimeUsed(1);
 		return (false);
