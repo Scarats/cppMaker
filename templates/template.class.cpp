@@ -5,11 +5,11 @@
 ===== CONSTRUCTORS / DESTRUCTORS ================================
 =================================================================
 */
-Template::Template() {};
+Template::Template() {}
 
-Template::~Template() {};
+Template::~Template() {}
 
-Template::Template(const Template &obj) { *this = obj; };
+Template::Template(const Template &obj) { *this = obj; }
 
 /*
 =================================================================
@@ -22,7 +22,7 @@ Template &Template::operator=(const Template &obj)
 	{
 	}
 	return (*this);
-};
+}
 
 /*
 =================================================================
