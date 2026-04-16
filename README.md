@@ -55,6 +55,7 @@ anywhere in your terminal.
 
 # Why cppMaker?
 This is my first C++ project, so it is more of a learning exercise than a side project. It’s a fun way to learn and a very useful, time-saving tool for the rest of my C++ journey.
+(The code is kinda aweful and would deserve to be rebuild from the ground up, but i'm too lazy for that, so as long as it works... lol)
 
 # Customization
 ## Templates
