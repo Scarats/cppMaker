@@ -1,21 +1,21 @@
-#include "../include/Template.hpp"
+#include "../include/Hy.hpp"
 
 /*=================================================================
 ===== CONSTRUCTORS / DESTRUCTORS ================================
 =================================================================
 */
-Template::Template() {}
+Hy::Hy() {}
 
-Template::~Template() {}
+Hy::~Hy() {}
 
-Template::Template(const Template &obj) { *this = obj; }
+Hy::Hy(const Hy &obj) { *this = obj; }
 
 /*
 =================================================================
 ===== OPERATORS =================================================
 =================================================================
 */
-Template &Template::operator=(const Template &obj)
+Hy &Hy::operator=(const Hy &obj)
 {
 	if (this != &obj)
 	{

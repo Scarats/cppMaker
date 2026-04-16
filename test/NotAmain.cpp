@@ -1,4 +1,4 @@
-#include "template.hpp"
+#include "notamain.hpp"
 
 int main(void)
 {

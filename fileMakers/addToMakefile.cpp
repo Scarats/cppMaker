@@ -2,9 +2,9 @@
 
 bool checkFile(const std::string &filepath)
 {
-	if (std::filesystem::exists(filepath))
-		return (false);
-	return (true);
+    if (std::filesystem::exists(filepath))
+        return (false);
+    return (true);
 }
 
 bool addToMakefile(MenuItem *item, MenuList *menu)
@@ -12,8 +12,8 @@ bool addToMakefile(MenuItem *item, MenuList *menu)
     menu->changeItem(*item, 0);
 
     // DISPLAY THE MENU
-	MenuList buffList("tmp");
-	buffList.addItemBasic(item->getInputName());
+    MenuList buffList("tmp");
+    buffList.addItemBasic(item->getInputName());
     if (!handleInputYesNo(&buffList, "add " + item->getInputName() + " to Makefile", MenuField::Name))
         return (false);
 
@@ -36,11 +36,18 @@ bool addToMakefile(MenuItem *item, MenuList *menu)
         return (false);
 
     // BUILD THE FILENAME WITH THE RELATIVE PATH FOR THE MAKEFILE
-    std::string fileName = BASIC_PATH_CPP;
-    if (!fileName.empty() && fileName.front() == '/')
-        fileName.erase(0, 1);
-    fileName.append("/" + item->getInput().getFileName() + " ");
-    
+    std::filesystem::path projectRoot = pwd();
+    std::filesystem::path filePath = std::filesystem::path(item->getInput().getPath()) / item->getInput().getFileName();
+
+    std::string fileName;
+    try
+    {
+        fileName = std::filesystem::relative(filePath, projectRoot).generic_string() + " ";
+    }
+    catch (...)
+    {
+        fileName = item->getInput().getFileName() + " ";
+    }
 
     // FIND AND ADD THE FILE TO THE MAKEFILE
     const std::string pattern = "SRCS = ";
